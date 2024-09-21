@@ -31,7 +31,7 @@ function requestTaxi() {
     const message = `Solicitud de taxi:\nUbicación: ${userLocation.latitude}, ${userLocation.longitude}\nDestino: ${destination}`;
 
     const whatsappNumber = "+123456789"; // El número de WhatsApp del taxi o central.
-    const whatsAppUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const whatsAppUrl = `https://wa.me/+573132613080?text=${encodeURIComponent(message)}`;
     
     window.open(whatsAppUrl, '_blank');
 }

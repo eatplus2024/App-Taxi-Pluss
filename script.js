@@ -1,48 +1,40 @@
-let participants = [];
+let userLocation = null;
 
-function addParticipant() {
-    const name = document.getElementById('name').value;
-    if (name) {
-        participants.push(name);
-        updateParticipantsList();
-        document.getElementById('name').value = '';
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            userLocation = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+            };
+            document.getElementById('location').textContent = `Ubicación: ${userLocation.latitude}, ${userLocation.longitude}`;
+        });
     } else {
-        alert("Por favor, ingresa un nombre.");
+        alert('La geolocalización no es soportada por tu navegador.');
     }
 }
 
-function updateParticipantsList() {
-    const list = document.getElementById('participantsList');
-    list.innerHTML = '';
-    participants.forEach(participant => {
-        const li = document.createElement('li');
-        li.textContent = participant;
-        list.appendChild(li);
-    });
-}
-
-function pickWinner() {
-    if (participants.length === 0) {
-        alert("No hay participantes para el sorteo.");
+function requestTaxi() {
+    const destination = document.getElementById('destination').value;
+    if (!userLocation) {
+        alert("Por favor, espera a que se obtenga tu ubicación.");
         return;
     }
 
-    const digitalBoard = document.getElementById('digitalBoard');
-    let currentIndex = 0;
-    const speed = 100; // Velocidad de cambio de nombre en milisegundos
-    const duration = 5000; // Duración total del efecto en milisegundos
+    if (!destination) {
+        alert("Por favor, ingresa un destino.");
+        return;
+    }
 
-    digitalBoard.classList.remove('winner');
+    document.getElementById('destinationDisplay').textContent = `Destino: ${destination}`;
 
-    const interval = setInterval(() => {
-        digitalBoard.textContent = participants[currentIndex];
-        currentIndex = (currentIndex + 1) % participants.length;
-    }, speed);
+    const message = `Solicitud de taxi:\nUbicación: ${userLocation.latitude}, ${userLocation.longitude}\nDestino: ${destination}`;
 
-    setTimeout(() => {
-        clearInterval(interval);
-        const winnerIndex = Math.floor(Math.random() * participants.length);
-        digitalBoard.textContent = `¡El ganador es: ${participants[winnerIndex]}!`;
-        digitalBoard.classList.add('winner');
-    }, duration);
+    const whatsappNumber = "+123456789"; // El número de WhatsApp del taxi o central.
+    const whatsAppUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsAppUrl, '_blank');
 }
+
+// Ejecutar cuando cargue la página para obtener la ubicación del usuario.
+window.onload = getLocation;

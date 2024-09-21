@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi DeliPlan</title>
+    <title>Taxi Pluss Yopal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="main-container">
-        <img src="https://cdn.pixabay.com/photo/2024/08/31/18/47/deliplan-9012182__340.png" alt="Logotipo" class="logo">
-        <h1>Taxi DeliPlan</h1>
-        <p>Solicita tu taxi aquí:</p>
+        <img src="logo.png" alt="Logotipo" class="logo">
+        <h1>Taxi Pluss Yopal</h1>
+        <p>Solicita tu taxi ahora mismo:</p>
+
+        <!-- Ubicación del Usuario -->
+        <p>Tu ubicación actual: <span id="locationStatus">Obteniendo ubicación...</span></p>
+
+        <!-- Destino -->
         <input type="text" id="destination" placeholder="Ingresa tu destino">
+
+        <!-- Solicitar Taxi -->
         <button onclick="requestTaxi()">Solicitar Taxi</button>
 
-        <h2>Detalles del Viaje</h2>
-        <div class="glass-box">
-            <ul id="tripDetails">
-                <li id="location">Ubicación: No disponible</li>
-                <li id="destinationDisplay">Destino: No establecido</li>
-            </ul>
+        <!-- Detalles del Pedido -->
+        <h2>Buscando tu taxi ahora mismo...</h2>
+        <div class="details-box">
+            <p><strong>Código de taxi:</strong> <span id="taxiCode">N/A</span></p>
+            <p><strong>Tiempo de llegada:</strong> <span id="arrivalTime">Calculando...</span></p>
+            <p><strong>Tarifa estimada:</strong> <span id="estimatedFare">$0</span></p>
         </div>
     </div>
 

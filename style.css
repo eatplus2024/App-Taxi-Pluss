@@ -1,63 +1,42 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-image: url(https://cdn.pixabay.com/photo/2016/03/28/09/54/fireworks-1285269_1280.jpg);
-  background-size: cover;
-  background-position: center;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
 }
 
 .main-container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: rgba(124, 174, 254, 0.5); /* Fondo azul con transparencia */
-  border: 3mm solid gold; /* Bordes dorados de 3mm */
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  color: #333;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
 }
 
 .logo {
-  max-width: 200px;
-  margin-bottom: 20px;
+    max-width: 150px;
+    margin-bottom: 20px;
 }
 
 input, button {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  border: 2px solid gold;
-  background-color: #333;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #333;
+    font-size: 16px;
 }
 
-.glass-box {
-  margin: 20px auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1); /* Transparencia para efecto de cristal */
-  border: 2mm solid gold; /* Bordes dorados de 2mm */
-  border-radius: 10px;
-  overflow: hidden;
-  max-width: 600px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+button {
+    background-color: #007bff;
+    color: white;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  background-color: #001f3f; /* Azul rey */
-  color: white;
-  margin: 5px;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 18px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.details-box {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }

@@ -1,4 +1,3 @@
-/* Reiniciar márgenes y estilos */
 * {
   margin: 0;
   padding: 0;
@@ -7,17 +6,15 @@
 
 body {
   font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: #f4f4f9;
+  justify-content: flex-start;
   height: 100vh;
-  overflow: hidden;
 }
 
 header {
-  position: relative;
   width: 100%;
   background: #0066cc;
   padding: 10px 0;
@@ -25,11 +22,8 @@ header {
 }
 
 .search-container {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -39,6 +33,8 @@ header {
   border: 2px solid #0066cc;
   border-radius: 5px;
   outline: none;
+  width: 60%;
+  max-width: 300px;
 }
 
 button {
@@ -59,9 +55,9 @@ button:hover {
 .results-board {
   display: none;
   margin-top: 20px;
-  width: 80%;
+  width: 90%;
   max-width: 400px;
-  background: white;
+  background: #ffffff;
   border: 2px solid #0066cc;
   border-radius: 10px;
   padding: 20px;
@@ -78,9 +74,7 @@ button:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  text-align: center;
   font-size: 16px;
-  cursor: pointer;
   text-decoration: none;
 }
 

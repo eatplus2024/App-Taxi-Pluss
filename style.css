@@ -1,69 +1,50 @@
-/* Estilos generales */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+// Lista de imágenes con sus palabras clave y enlaces
+const images = [
+    {
+        src: "https://pixabay.com/get/g2a6b4c75812b70c1788e9c204640b5c6f290e09ed2e33ff0160e3ffb08c53c5a3b830dc7f55d1467f5df2b34b7ef2252_640.jpg",
+        keywords: ["naturaleza", "atardecer", "montañas"],
+        link: "https://pixabay.com/es/photos/atardecer-oscuridad-monta%C3%B1as-nubes-8516639/"
+    },
+    {
+        src: "https://pixabay.com/get/g9c5837b2292730ae92b47db7b40546e4b26294cb72c649c7d8575c6c44f4eb8e75b3a2d0cf2353e1018a17af8bcaf405_640.jpg",
+        keywords: ["naturaleza", "pájaro", "nubes"],
+        link: "https://pixabay.com/es/photos/p%C3%A1jaro-azul-nubes-tiempo-bol%C3%ADgrafo-8788491/"
+    },
+    {
+        src: "https://pixabay.com/get/g40c9c84172da97e8a276d04264ccad7cf2b4f0876b42e3cc366bdcbdb731bb6d06f1b4bcd15e7296af8c4649c787426d_640.jpg",
+        keywords: ["playa", "agua", "arena"],
+        link: "https://pixabay.com/es/photos/playa-ondas-costa-horizonte-mar-8563083/"
+    }
+];
+
+// Referencias a los elementos
+const searchInput = document.getElementById("searchInput");
+const gallery = document.getElementById("gallery");
+
+// Mostrar todas las imágenes al inicio
+function displayImages(filteredImages) {
+    gallery.innerHTML = ""; // Limpiar la galería
+    filteredImages.forEach(image => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image.src;
+        imgElement.alt = image.keywords.join(", ");
+        imgElement.title = image.keywords.join(", ");
+        imgElement.onclick = () => window.open(image.link, "_blank");
+        gallery.appendChild(imgElement);
+    });
 }
 
-/* Contenedor general */
-.container {
-    text-align: center;
-    max-width: 900px;
-    margin: auto;
+// Filtrar imágenes según la búsqueda
+function filterImages() {
+    const query = searchInput.value.toLowerCase();
+    const filtered = images.filter(image =>
+        image.keywords.some(keyword => keyword.includes(query))
+    );
+    displayImages(filtered);
 }
 
-/* Caja de búsqueda */
-.search-box {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
+// Inicializar con todas las imágenes
+displayImages(images);
 
-.search-box h1 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #444;
-}
-
-.search-box input {
-    width: 80%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-.search-box input:focus {
-    outline: none;
-    border-color: #ff7e5f;
-}
-
-/* Galería */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 15px;
-}
-
-.gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-}
-
-.gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
+// Agregar evento al buscar
+searchInput.addEventListener("input", filterImages);

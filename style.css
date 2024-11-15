@@ -1,87 +1,78 @@
-/* Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Configuración del cuerpo */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f5;
-  color: #333;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
-/* Contenedor de búsqueda */
-.search-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  background: linear-gradient(135deg, #0066cc, #00cc99);
-  padding: 20px 30px;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+header {
+    padding: 20px;
+    text-align: center;
+    background-color: #4a90e2;
+    color: white;
 }
 
-.search-message {
-  color: #ffffff;
-  font-size: 18px;
-  margin-bottom: 15px;
+header h1 {
+    font-size: 1.8em;
 }
 
-#searchBar {
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 400px;
-  margin-bottom: 10px;
+header input[type="text"] {
+    width: 80%;
+    max-width: 500px;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #009977;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.gallery {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-button:hover {
-  background-color: #007755;
+.section {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
 }
 
-/* Contenedor de resultados */
-.results-grid {
-  margin-top: 20px;
-  display: none; /* Se muestra dinámicamente */
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 20px;
+.section h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #4a90e2;
 }
 
-/* Miniaturas de imágenes */
-.thumbnail {
-  width: 30%;
-  max-width: 120px;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
+.gallery-item {
+    display: inline-block;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.thumbnail:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    header input[type="text"] {
+        width: 90%;
+    }
+    .gallery {
+        padding: 5px;
+    }
 }

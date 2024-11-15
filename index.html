@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería Interactiva</title>
+  <title>Barra de Búsqueda</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Barra de búsqueda centrada -->
+  <!-- Contenedor de la barra de búsqueda -->
   <div class="search-container">
-    <p class="search-message">Escribe lo que deseas buscar:</p>
-    <input type="text" id="searchBar" placeholder="Buscar palabras clave (e.g., agua, playa)">
-    <button onclick="searchImages()">Buscar</button>
+    <h1 class="search-title">¡Encuentra lo que buscas!</h1>
+    <p class="search-subtitle">Escribe una palabra clave y comienza tu búsqueda</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="¿Qué deseas buscar?">
+      <button id="searchButton">Buscar</button>
+    </div>
   </div>
-
-  <!-- Contenedor de resultados -->
-  <div id="resultsGrid" class="results-grid"></div>
-
-  <script src="script.js"></script>
 </body>
 </html>

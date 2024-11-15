@@ -9,10 +9,10 @@ const images = [
 
 function buscarImagen() {
   const query = document.getElementById('searchBar').value.toLowerCase();
-  const resultsBoard = document.getElementById('resultsBoard');
-  resultsBoard.innerHTML = ''; // Limpiar resultados previos
-  resultsBoard.style.display = 'none'; // Ocultar tablero inicialmente
-  
+  const resultsGrid = document.getElementById('resultsGrid');
+  resultsGrid.innerHTML = ''; // Limpiar resultados previos
+  resultsGrid.style.display = 'none'; // Ocultar resultados inicialmente
+
   // Buscar coincidencias
   const results = images.filter(image =>
     image.keywords.some(keyword => keyword.includes(query))
@@ -20,16 +20,16 @@ function buscarImagen() {
 
   if (results.length > 0) {
     results.forEach(image => {
-      const button = document.createElement('a');
-      button.className = 'result-btn';
-      button.href = image.url;
-      button.target = '_blank';
-      button.textContent = image.name;
-      resultsBoard.appendChild(button);
+      const img = document.createElement('img');
+      img.src = image.url;
+      img.alt = image.name;
+      img.className = 'thumbnail';
+      img.onclick = () => window.open(image.url, '_blank');
+      resultsGrid.appendChild(img);
     });
-    resultsBoard.style.display = 'block'; // Mostrar tablero con resultados
+    resultsGrid.style.display = 'flex'; // Mostrar resultados
   } else {
-    resultsBoard.innerHTML = '<p>No se encontraron resultados.</p>';
-    resultsBoard.style.display = 'block';
+    resultsGrid.innerHTML = '<p>No se encontraron resultados.</p>';
+    resultsGrid.style.display = 'block';
   }
 }

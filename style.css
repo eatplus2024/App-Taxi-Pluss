@@ -7,81 +7,72 @@
 
 /* Configuración del cuerpo */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f5;
-  color: #333;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-/* Contenedor de búsqueda */
+/* Contenedor principal de la barra de búsqueda */
 .search-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
-  background: linear-gradient(135deg, #0066cc, #00cc99);
-  padding: 20px 30px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
 }
 
-.search-message {
-  color: #ffffff;
-  font-size: 18px;
-  margin-bottom: 15px;
+/* Título */
+.search-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-#searchBar {
-  padding: 10px;
+/* Subtítulo */
+.search-subtitle {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #f0f0f0;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#searchInput {
+  width: 70%;
+  padding: 10px 15px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  width: 80%;
-  max-width: 400px;
-  margin-bottom: 10px;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-button {
+#searchButton {
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: #009977;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #007755;
-}
-
-/* Contenedor de resultados */
-.results-grid {
-  margin-top: 20px;
-  display: none; /* Se muestra dinámicamente */
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 20px;
-}
-
-/* Miniaturas de imágenes */
-.thumbnail {
-  width: 30%;
-  max-width: 120px;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-}
-
-.thumbnail:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+#searchButton:hover {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  transform: scale(1.05);
 }

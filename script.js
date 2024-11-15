@@ -4,11 +4,11 @@ const searchInput = document.getElementById('searchInput');
 
 // Agregar evento al botón de búsqueda
 searchButton.addEventListener('click', () => {
-  const query = searchInput.value.trim(); // Obtener el texto del input
+  const query = searchInput.value.trim();
 
   if (query) {
-    alert(`Buscando: ${query}`); // Acción básica, puede ser reemplazada
+    alert(`Buscando: ${query}`);
   } else {
-    alert('Por favor, ingresa una palabra clave para buscar.');
+    alert('Por favor, escribe algo para buscar.');
   }
 });

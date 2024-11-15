@@ -1,12 +1,15 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Configuración del cuerpo */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  background-color: #f0f0f5;
+  color: #333;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,16 +17,17 @@ body {
   justify-content: center;
 }
 
+/* Contenedor de búsqueda */
 .search-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: #0066cc;
-  padding: 20px;
+  background: linear-gradient(135deg, #0066cc, #00cc99);
+  padding: 20px 30px;
   border-radius: 15px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .search-message {
@@ -38,43 +42,46 @@ body {
   border: none;
   border-radius: 5px;
   width: 80%;
-  max-width: 300px;
+  max-width: 400px;
   margin-bottom: 10px;
 }
 
 button {
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 16px;
-  background-color: #00cc99;
   color: white;
+  background-color: #009977;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #009977;
+  background-color: #007755;
 }
 
+/* Contenedor de resultados */
 .results-grid {
   margin-top: 20px;
-  display: none;
+  display: none; /* Se muestra dinámicamente */
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
+  padding: 20px;
 }
 
+/* Miniaturas de imágenes */
 .thumbnail {
   width: 30%;
   max-width: 120px;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
 }
 
 .thumbnail:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
   cursor: pointer;
 }

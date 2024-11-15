@@ -7,14 +7,13 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="search-container">
-      <input type="text" id="searchBar" placeholder="Buscar...">
-      <button onclick="buscarImagen()">Buscar</button>
-    </div>
-  </header>
+  <div class="search-container">
+    <p class="search-message">Escribe lo que deseas buscar:</p>
+    <input type="text" id="searchBar" placeholder="Buscar...">
+    <button onclick="buscarImagen()">Buscar</button>
+  </div>
 
-  <div id="resultsBoard" class="results-board"></div>
+  <div id="resultsGrid" class="results-grid"></div>
 
   <script src="script.js"></script>
 </body>

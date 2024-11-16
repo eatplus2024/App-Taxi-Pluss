@@ -1,50 +1,29 @@
-// Lista de imágenes con sus palabras clave y enlaces
-const images = [
-    {
-        src: "https://pixabay.com/get/g2a6b4c75812b70c1788e9c204640b5c6f290e09ed2e33ff0160e3ffb08c53c5a3b830dc7f55d1467f5df2b34b7ef2252_640.jpg",
-        keywords: ["naturaleza", "atardecer", "montañas"],
-        link: "https://pixabay.com/es/photos/atardecer-oscuridad-monta%C3%B1as-nubes-8516639/"
-    },
-    {
-        src: "https://pixabay.com/get/g9c5837b2292730ae92b47db7b40546e4b26294cb72c649c7d8575c6c44f4eb8e75b3a2d0cf2353e1018a17af8bcaf405_640.jpg",
-        keywords: ["naturaleza", "pájaro", "nubes"],
-        link: "https://pixabay.com/es/photos/p%C3%A1jaro-azul-nubes-tiempo-bol%C3%ADgrafo-8788491/"
-    },
-    {
-        src: "https://pixabay.com/get/g40c9c84172da97e8a276d04264ccad7cf2b4f0876b42e3cc366bdcbdb731bb6d06f1b4bcd15e7296af8c4649c787426d_640.jpg",
-        keywords: ["playa", "agua", "arena"],
-        link: "https://pixabay.com/es/photos/playa-ondas-costa-horizonte-mar-8563083/"
-    }
-];
-
-// Referencias a los elementos
-const searchInput = document.getElementById("searchInput");
-const gallery = document.getElementById("gallery");
-
-// Mostrar todas las imágenes al inicio
-function displayImages(filteredImages) {
-    gallery.innerHTML = ""; // Limpiar la galería
-    filteredImages.forEach(image => {
-        const imgElement = document.createElement("img");
-        imgElement.src = image.src;
-        imgElement.alt = image.keywords.join(", ");
-        imgElement.title = image.keywords.join(", ");
-        imgElement.onclick = () => window.open(image.link, "_blank");
-        gallery.appendChild(imgElement);
-    });
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
 }
-
-// Filtrar imágenes según la búsqueda
-function filterImages() {
-    const query = searchInput.value.toLowerCase();
-    const filtered = images.filter(image =>
-        image.keywords.some(keyword => keyword.includes(query))
-    );
-    displayImages(filtered);
+#search-container {
+    padding: 10px;
+    text-align: center;
 }
-
-// Inicializar con todas las imágenes
-displayImages(images);
-
-// Agregar evento al buscar
-searchInput.addEventListener("input", filterImages);
+#search {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+}
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+.image-card {
+    position: relative;
+    cursor: pointer;
+}
+.image-card img {
+    width: 100%;
+    border-radius: 8px;
+}

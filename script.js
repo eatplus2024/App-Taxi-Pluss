@@ -1,19 +1,21 @@
-document.getElementById("search").addEventListener("input", (e) => {
-    const searchTerm = e.target.value.toLowerCase();
+document.getElementById("search").addEventListener("input", function () {
+    const query = this.value.toLowerCase();
     const sections = document.querySelectorAll(".section");
     
-    sections.forEach((section) => {
-        let matches = 0;
+    sections.forEach(section => {
         const cards = section.querySelectorAll(".image-card");
-        cards.forEach((card) => {
+        let sectionHasMatch = false;
+
+        cards.forEach(card => {
             const name = card.getAttribute("data-name").toLowerCase();
-            if (name.includes(searchTerm)) {
+            if (name.includes(query)) {
                 card.style.display = "block";
-                matches++;
+                sectionHasMatch = true;
             } else {
                 card.style.display = "none";
             }
         });
-        section.style.display = matches > 0 ? "block" : "none";
+
+        section.style.display = sectionHasMatch ? "block" : "none";
     });
 });

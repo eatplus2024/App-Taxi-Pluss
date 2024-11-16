@@ -1,8 +1,8 @@
 document.querySelector('.search-btn').addEventListener('click', () => {
-    const query = document.querySelector('#search').value;
-    if (query) {
-        alert(`Searching for: "${query}"`);
+    const query = document.querySelector('.search-input').value;
+    if (query.trim() !== '') {
+        alert(`You searched for: "${query}"`);
     } else {
-        alert("Please type something to search!");
+        alert("Please enter a search term!");
     }
 });

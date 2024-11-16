@@ -1,7 +1,7 @@
-document.getElementById("search").addEventListener("input", function () {
-    const query = this.value.toLowerCase();
+document.getElementById("search-button").addEventListener("click", function () {
+    const query = document.getElementById("search").value.toLowerCase();
     const sections = document.querySelectorAll(".section");
-    
+
     sections.forEach(section => {
         const cards = section.querySelectorAll(".image-card");
         let sectionHasMatch = false;
@@ -18,4 +18,9 @@ document.getElementById("search").addEventListener("input", function () {
 
         section.style.display = sectionHasMatch ? "block" : "none";
     });
+
+    // Desplazar el buscador hacia arriba al realizar la búsqueda
+    document.querySelector(".search-container").style.position = "relative";
+    document.querySelector(".search-container").style.top = "0";
+    document.querySelector(".search-container").style.transform = "none";
 });

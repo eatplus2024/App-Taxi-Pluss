@@ -1,66 +1,91 @@
-/* Resetting margins and paddings */
+/* Reset and body styling */
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #1d3557, #457b9d);
-    color: #fff;
+    background: url('https://cdn.pixabay.com/photo/2013/05/11/14/50/sculpture-99484_1280.jpg') no-repeat center center/cover;
+    font-family: 'Arial', sans-serif;
 }
 
+/* Search container styling */
 .search-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     width: 90%;
-    max-width: 400px;
-    height: 60px;
-    background: #f1faee;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-out;
 }
 
+/* Input styling */
 .search-input {
     flex: 1;
-    height: 100%;
-    border: none;
-    border-radius: 30px 0 0 30px;
+    height: 70px;
     padding: 0 20px;
-    font-size: 16px;
-    outline: none;
-}
-
-.search-btn {
-    width: 60px;
-    height: 100%;
-    background: #e63946;
-    color: #fff;
     font-size: 20px;
     border: none;
-    border-radius: 0 30px 30px 0;
+    outline: none;
+    background: transparent;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+    font-weight: normal;
+}
+
+/* Button styling */
+.search-btn {
+    width: 150px;
+    height: 70px;
+    background: linear-gradient(45deg, #e63946, #f77f00);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
 }
 
 .search-btn:hover {
-    background: #d90429;
+    background: linear-gradient(45deg, #f77f00, #e63946);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Keyframes for smooth appearance */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsiveness */
 @media (max-width: 600px) {
     .search-container {
-        height: 50px;
+        max-width: 90%;
     }
 
     .search-input {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .search-btn {
-        font-size: 18px;
+        font-size: 16px;
     }
 }

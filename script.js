@@ -19,8 +19,8 @@ document.getElementById("search-button").addEventListener("click", function () {
         section.style.display = sectionHasMatch ? "block" : "none";
     });
 
-    // Desplazar el buscador hacia arriba al realizar la búsqueda
-    document.querySelector(".search-container").style.position = "relative";
-    document.querySelector(".search-container").style.top = "0";
+    // Ajustar buscador al realizar la búsqueda
+    document.querySelector(".search-container").style.position = "absolute";
+    document.querySelector(".search-container").style.top = "10px";
     document.querySelector(".search-container").style.transform = "none";
 });

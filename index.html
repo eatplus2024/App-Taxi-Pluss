@@ -3,15 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería</title>
+    <title>Galería de Imágenes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="search-container">
+    <div class="search-container">
         <input type="text" id="search" placeholder="Buscar imágenes...">
     </div>
     <div id="gallery">
-        <!-- Las imágenes se cargarán dinámicamente -->
+        <!-- Naturaleza -->
+        <div class="section" data-category="Naturaleza">
+            <h2>Naturaleza</h2>
+            <div class="image-grid">
+                <div class="image-card" data-name="Atardecer">
+                    <a href="https://pixabay.com/es/photos/atardecer-oscuridad-monta%C3%B1as-nubes-8516639/" target="_blank">
+                        <img src="https://pixabay.com/get/g6a7439bfbca3d9492daabb2e6c3082c5f94633ab861ea2f05dc49950134e14edc3fdd805de0a5b92a2484b844849bfc0c4e0ffdf3609bc11071091b149a2d312_640.jpg" alt="Atardecer">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Pájaro Azul">
+                    <a href="https://pixabay.com/es/photos/p%C3%A1jaro-azul-nubes-tiempo-bol%C3%ADgrafo-8788491/" target="_blank">
+                        <img src="https://pixabay.com/get/gb6fa3446dc3e3944ff31b72a2bd0c22bb07c6e162ab9c59e253f12dd5d1e161aa2632b51ef779d4c3c154e60426f8ca0_640.jpg" alt="Pájaro Azul">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Mujeres -->
+        <div class="section" data-category="Mujeres">
+            <h2>Mujeres</h2>
+            <div class="image-grid">
+                <div class="image-card" data-name="Bandera">
+                    <a href="https://pixabay.com/es/illustrations/bandera-fondo-mujer-g%C3%A9nero-mujer-4887650/" target="_blank">
+                        <img src="https://pixabay.com/get/gad1f91b80a54e0564b51b2eb9c7884d0d637bc48d9500fbcf9f6f20334811dd01e16f7969c9db6a1c7a5ff48e6a38f10_640.jpg" alt="Bandera">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Mujer Retrato">
+                    <a href="https://pixabay.com/es/photos/mujer-retrato-modelo-peinado-837156/" target="_blank">
+                        <img src="https://pixabay.com/get/g40aa2828ab604edaf9eb4fb998032c1531d9afba8d82ad4b746d6e734f389fa29340b0b9ff8c8cc0fca231389c3c6bd3_640.jpg" alt="Mujer Retrato">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Playa -->
+        <div class="section" data-category="Playa">
+            <h2>Playa</h2>
+            <div class="image-grid">
+                <div class="image-card" data-name="Playa Ondas">
+                    <a href="https://pixabay.com/es/photos/playa-ondas-costa-horizonte-mar-8563083/" target="_blank">
+                        <img src="https://pixabay.com/get/gf1d00ab1a0c5556469b6171e131211b6f7c32cb8c2b0ed12a8b5de67c1db19d7857319fb09e5e96a7a57a5efc2276c18_640.jpg" alt="Playa Ondas">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Costa Mar">
+                    <a href="https://pixabay.com/es/photos/costa-mar-playa-paisaje-naturaleza-7338147/" target="_blank">
+                        <img src="https://pixabay.com/get/gd92874a6880ce123f73c5be2086490c9a1a45b47330dcf96253da687790ef0ec08613dc1b38bb027d1856e7c1a74b4f7_640.jpg" alt="Costa Mar">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

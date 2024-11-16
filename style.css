@@ -9,30 +9,31 @@ body {
 /* Contenedor del buscador */
 .search-container {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    flex-direction: column;
     gap: 10px;
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
     z-index: 10;
 }
 
 #search {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%;
 }
 
 #search-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
+    padding: 15px;
+    font-size: 18px;
     background-color: #007bff;
     color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -43,7 +44,7 @@ body {
 
 /* Contenedor de la galería */
 #gallery {
-    margin-top: 150px;
+    margin-top: 200px;
     padding: 20px;
 }
 
@@ -59,7 +60,7 @@ body {
 
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     gap: 10px;
 }
 
@@ -70,11 +71,11 @@ body {
 .image-card img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 5px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .image-card img:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }

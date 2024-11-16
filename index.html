@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería con Buscador</title>
+    <title>Galería</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="search-box">
-            <h1>¿Qué imagen deseas encontrar?</h1>
-            <input type="text" id="searchInput" placeholder="Escribe una palabra clave...">
-        </div>
-        <div class="gallery" id="gallery">
-            <!-- Las imágenes se generarán aquí dinámicamente -->
-        </div>
+    <div id="search-container">
+        <input type="text" id="search" placeholder="Buscar imágenes...">
+    </div>
+    <div id="gallery">
+        <!-- Las imágenes se cargarán dinámicamente -->
     </div>
     <script src="script.js"></script>
 </body>

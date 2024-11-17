@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorteo DeliPlan</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Iconos de FontAwesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>Galería de Imágenes</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="main-container">
-        <img src="https://cdn.pixabay.com/photo/2024/08/31/18/47/deliplan-9012182__340.png" alt="Logotipo" class="logo">
-        <h1>Sorteo DeliPlan</h1>
-        <p>Ingresa al sorteo:</p>
-        <input type="text" id="name" placeholder="Tu nombre">
-        <button onclick="addParticipant()">Participar</button>
-
-        <h2>Participantes</h2>
-
-        <!-- Sección de botones fuera de la caja de participantes -->
-        <div class="buttons-container">
-            <!-- Botones con iconos -->
-            <button id="editBtn" onclick="toggleEditMode()" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-            <button id="deleteBtn" onclick="toggleDeleteMode()" title="Eliminar"><i class="fas fa-trash"></i></button>
-            <button onclick="clearParticipants()" title="Eliminar todo"><i class="fas fa-times-circle"></i></button>
-        </div>
-
-        <div class="glass-box">
-            <ul id="participantsList"></ul>
-        </div>
-
-        <h2>Ganador</h2>
-        <div id="digitalBoard">Nadie ha ganado aún</div>
-        <button id="pickWinnerBtn" onclick="pickWinner()">Elegir Ganador</button>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Buscar imágenes..." />
+        <button id="search-button">Buscar</button>
     </div>
-
+    <div id="gallery">
+        <!-- Naturaleza -->
+        <div class="section" data-category="Naturaleza">
+            <h2>Naturaleza</h2>
+            <div class="image-grid">
+                <!-- Imágenes -->
+                <div class="image-card" data-name="Atardecer Montañas">
+                    <a href="https://unsplash.com/photos/Jztmx9yqjBw" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=100&h=100&fit=crop" alt="Atardecer Montañas">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Bosque Verano">
+                    <a href="https://unsplash.com/photos/d1UPkiFd04A" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=100&h=100&fit=crop" alt="Bosque Verano">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Río Tranquilo">
+                    <a href="https://unsplash.com/photos/pHANr-CpbYM" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1465146344425-fd4c8cf68c3d?w=100&h=100&fit=crop" alt="Río Tranquilo">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Montañas Nevadas">
+                    <a href="https://unsplash.com/photos/a8lTjWT6aJc" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=100&h=100&fit=crop" alt="Montañas Nevadas">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Prado Verde">
+                    <a href="https://unsplash.com/photos/t8T_yUgCKSM" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=100&h=100&fit=crop" alt="Prado Verde">
+                    </a>
+                </div>
+                <div class="image-card" data-name="Campo de Flores">
+                    <a href="https://unsplash.com/photos/6VhPY27jdps" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop" alt="Campo de Flores">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Mujeres -->
+        <div class="section" data-category="Mujeres">
+            <h2>Mujeres</h2>
+            <div class="image-grid">
+                <!-- Imágenes -->
+                <div class="image-card" data-name="Retrato Sonrisa">
+                    <a href="https://unsplash.com/photos/iEEBWgY_6lA" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=100&h=100&fit=crop" alt="Retrato Sonrisa">
+                    </a>
+                </div>
+                <!-- Añade 5 imágenes más aquí con diferentes nombres relacionados -->
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

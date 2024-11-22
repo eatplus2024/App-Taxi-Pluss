@@ -1,26 +1,28 @@
-document.getElementById("search-button").addEventListener("click", function () {
-    const query = document.getElementById("search").value.toLowerCase();
-    const sections = document.querySelectorAll(".section");
+const imagesData = [
+    { id: 1, url: "https://via.placeholder.com/150", keywords: ["naturaleza", "montaña"] },
+    { id: 2, url: "https://via.placeholder.com/150", keywords: ["ciudad", "noche"] },
+    { id: 3, url: "https://via.placeholder.com/150", keywords: ["playa", "mar"] },
+    { id: 4, url: "https://via.placeholder.com/150", keywords: ["bosque", "árboles"] }
+];
 
-    sections.forEach(section => {
-        const cards = section.querySelectorAll(".image-card");
-        let sectionHasMatch = false;
+function searchImages() {
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const galleryContainer = document.getElementById("galleryContainer");
+    galleryContainer.innerHTML = "";
 
-        cards.forEach(card => {
-            const name = card.getAttribute("data-name").toLowerCase();
-            if (name.includes(query)) {
-                card.style.display = "block";
-                sectionHasMatch = true;
-            } else {
-                card.style.display = "none";
-            }
+    const filteredImages = imagesData.filter(image =>
+        image.keywords.some(keyword => keyword.includes(searchTerm))
+    );
+
+    if (filteredImages.length > 0) {
+        filteredImages.forEach(image => {
+            const imgElement = document.createElement("img");
+            imgElement.src = image.url;
+            imgElement.alt = `Image ${image.id}`;
+            imgElement.className = "thumbnail";
+            galleryContainer.appendChild(imgElement);
         });
-
-        section.style.display = sectionHasMatch ? "block" : "none";
-    });
-
-    // Ajustar buscador al realizar la búsqueda
-    document.querySelector(".search-container").style.position = "absolute";
-    document.querySelector(".search-container").style.top = "10px";
-    document.querySelector(".search-container").style.transform = "none";
-});
+    } else {
+        galleryContainer.innerHTML = "<p>No se encontraron imágenes</p>";
+    }
+}

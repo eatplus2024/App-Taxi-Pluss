@@ -1,11 +1,12 @@
 const images = [
-    { id: 1, url: "https://via.placeholder.com/150?text=Montaña", keywords: ["montaña", "naturaleza", "paisaje"] },
-    { id: 2, url: "https://via.placeholder.com/150?text=Ciudad", keywords: ["ciudad", "noche", "luces"] },
-    { id: 3, url: "https://via.placeholder.com/150?text=Playa", keywords: ["playa", "mar", "vacaciones"] },
-    { id: 4, url: "https://via.placeholder.com/150?text=Bosque", keywords: ["bosque", "árboles", "verde"] },
-    { id: 5, url: "https://via.placeholder.com/150?text=Río", keywords: ["río", "agua", "paisaje"] }
+    { id: 1, url: "https://via.placeholder.com/300?text=Naturaleza", keywords: ["naturaleza", "verde", "árboles"] },
+    { id: 2, url: "https://via.placeholder.com/300?text=Agua", keywords: ["agua", "río", "mar"] },
+    { id: 3, url: "https://via.placeholder.com/300?text=Playa", keywords: ["playa", "vacaciones", "arena"] },
+    { id: 4, url: "https://via.placeholder.com/300?text=Ciudad", keywords: ["ciudad", "urbano", "edificios"] },
+    { id: 5, url: "https://via.placeholder.com/300?text=Montaña", keywords: ["montaña", "nieve", "paisaje"] }
 ];
 
+// Function to display all images
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
@@ -16,33 +17,35 @@ function displayImages(imageList) {
     }
 
     imageList.forEach(image => {
-        const img = document.createElement("img");
-        img.src = image.url;
-        img.alt = image.keywords.join(", ");
-        img.className = "thumbnail";
-        gallery.appendChild(img);
+        const imgElement = document.createElement("img");
+        imgElement.src = image.url;
+        imgElement.alt = image.keywords.join(", ");
+        gallery.appendChild(imgElement);
     });
 }
 
+// Search for images based on keywords
 function searchImages() {
-    const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
         alert("Por favor, introduce una palabra clave.");
         return;
     }
 
-    const results = images.filter(image =>
+    const filteredImages = images.filter(image =>
         image.keywords.some(keyword => keyword.includes(query))
     );
 
-    displayImages(results);
+    displayImages(filteredImages);
 }
 
+// Reset the gallery to show all images
 function resetGallery() {
     document.getElementById("searchInput").value = "";
     displayImages(images);
 }
 
+// Initial display of all images
 window.onload = () => {
     displayImages(images);
 };

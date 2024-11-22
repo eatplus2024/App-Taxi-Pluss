@@ -9,25 +9,33 @@ const images = [
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
+
     if (imageList.length === 0) {
-        gallery.innerHTML = "<p>No se encontraron imágenes.</p>";
-    } else {
-        imageList.forEach(image => {
-            const imgElement = document.createElement("img");
-            imgElement.src = image.url;
-            imgElement.alt = image.keywords.join(", ");
-            imgElement.classList.add("thumbnail");
-            gallery.appendChild(imgElement);
-        });
+        gallery.innerHTML = "<p>No se encontraron imágenes relacionadas.</p>";
+        return;
     }
+
+    imageList.forEach(image => {
+        const img = document.createElement("img");
+        img.src = image.url;
+        img.alt = image.keywords.join(", ");
+        img.className = "thumbnail";
+        gallery.appendChild(img);
+    });
 }
 
 function searchImages() {
-    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-    const filteredImages = images.filter(image => 
-        image.keywords.some(keyword => keyword.includes(searchTerm))
+    const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    if (!query) {
+        alert("Por favor, introduce una palabra clave.");
+        return;
+    }
+
+    const results = images.filter(image =>
+        image.keywords.some(keyword => keyword.includes(query))
     );
-    displayImages(filteredImages);
+
+    displayImages(results);
 }
 
 function resetGallery() {
@@ -35,4 +43,6 @@ function resetGallery() {
     displayImages(images);
 }
 
-window.onload = () => displayImages(images);
+window.onload = () => {
+    displayImages(images);
+};

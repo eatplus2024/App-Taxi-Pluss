@@ -4,26 +4,31 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2rem; /* Tamaño ajustado para móviles */
     color: #333;
     margin-top: 20px;
+    padding: 0 10px;
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #666;
+    margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 #searchBar {
     margin: 20px auto;
-    max-width: 600px;
+    max-width: 90%; /* Aseguramos que no exceda el ancho de la pantalla */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap; /* Permite que los elementos se reorganicen en línea */
 }
 
 #searchInput {
@@ -53,25 +58,27 @@ button:hover {
 
 #gallery {
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ajuste dinámico */
+    gap: 10px; /* Separación entre imágenes */
     padding: 10px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 #gallery img {
-    width: 100%; /* Limita el ancho al 100% del contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-    border-radius: 10px;
+    max-width: 100%;
+    width: 100%; /* Se asegura de ocupar el espacio disponible */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 8px; /* Bordes suaves */
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
 
 #gallery img:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05); /* Efecto visual */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 footer {
@@ -79,5 +86,37 @@ footer {
     padding: 10px 0;
     background-color: #333;
     color: #fff;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Ajuste de tamaño */
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem; /* Más pequeño en celulares */
+    }
+
+    p {
+        font-size: 0.9rem; /* Texto más pequeño */
+    }
+
+    #searchBar {
+        flex-direction: column; /* Elementos en columna */
+        gap: 15px;
+    }
+
+    button {
+        width: 100%; /* Botones ocupan todo el ancho */
+    }
+
+    #gallery {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Imágenes más pequeñas */
+        gap: 8px; /* Separación reducida */
+    }
+
+    #gallery img {
+        border-radius: 5px; /* Bordes ajustados */
+    }
+
+    footer {
+        font-size: 0.8rem; /* Texto más compacto */
+    }
 }

@@ -42,7 +42,7 @@ function displayImages(imageList) {
         const img = document.createElement("img");
         img.src = `${image.url}?w=300&h=200&fit=crop&timestamp=${new Date().getTime()}`; // Añadimos timestamp para evitar caché
         img.alt = image.keywords.join(", ");
-        img.style.width = "60%"; // Ancho de miniatura
+        img.style.width = "90%"; // Ancho de miniatura
         img.style.maxWidth = "300px"; // Tamaño máximo para pantallas grandes
         img.style.height = "auto"; // Mantiene proporciones
         img.style.margin = "10px auto"; // Añade espacio entre imágenes

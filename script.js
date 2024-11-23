@@ -2,13 +2,13 @@ const images = [
     {
         id: 1,
         url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-        keywords: ["agua", "río", "mar"],
+        keywords: ["restaurante", "comida", "agua"],
         link: "https://unsplash.com/photos/e9df14d4d9d0"
     },
     {
         id: 2,
         url: "https://images.unsplash.com/photo-1557682263-7056e2d2235d",
-        keywords: ["naturaleza", "bosque", "verde"],
+        keywords: ["hotel", "naturaleza", "bosque"],
         link: "https://unsplash.com/photos/7056e2d2235d"
     },
     {
@@ -20,18 +20,11 @@ const images = [
     {
         id: 4,
         url: "https://images.unsplash.com/photo-1545286987-4a3bfb09dfc2",
-        keywords: ["montaña", "paisaje", "nieve"],
+        keywords: ["peluquería", "ciudad", "urbano"],
         link: "https://unsplash.com/photos/4a3bfb09dfc2"
-    },
-    {
-        id: 5,
-        url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-        keywords: ["ciudad", "urbano", "edificios"],
-        link: "https://unsplash.com/photos/e9df14d4d9d0"
     }
 ];
 
-// Function to display all images
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
@@ -42,20 +35,19 @@ function displayImages(imageList) {
     }
 
     imageList.forEach(image => {
-        const anchorElement = document.createElement("a");
-        anchorElement.href = image.link;
-        anchorElement.target = "_blank"; // Opens the link in a new tab
+        const anchor = document.createElement("a");
+        anchor.href = image.link;
+        anchor.target = "_blank";
 
-        const imgElement = document.createElement("img");
-        imgElement.src = `${image.url}?w=300&h=200&fit=crop`;
-        imgElement.alt = image.keywords.join(", ");
+        const img = document.createElement("img");
+        img.src = `${image.url}?w=300&h=200&fit=crop`;
+        img.alt = image.keywords.join(", ");
 
-        anchorElement.appendChild(imgElement);
-        gallery.appendChild(anchorElement);
+        anchor.appendChild(img);
+        gallery.appendChild(anchor);
     });
 }
 
-// Search for images based on keywords
 function searchImages() {
     const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
@@ -70,13 +62,9 @@ function searchImages() {
     displayImages(filteredImages);
 }
 
-// Reset the gallery to show all images
 function resetGallery() {
     document.getElementById("searchInput").value = "";
     displayImages(images);
 }
 
-// Initial display of all images
-window.onload = () => {
-    displayImages(images);
-};
+window.onload = () => displayImages(images);

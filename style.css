@@ -5,6 +5,7 @@ body {
     background-color: #f7f9fc;
     color: #333;
     text-align: center;
+    line-height: 1.6;
 }
 
 /* Header */
@@ -12,7 +13,7 @@ body {
     background: linear-gradient(135deg, #007BFF, #00C6FF);
     color: white;
     padding: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -33,17 +34,17 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin: 20px auto;
     padding: 15px;
+    margin: 20px auto 30px; /* Adds spacing below the search bar */
     max-width: 80%;
     background: white;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid gold; /* Golden border */
+    border: 2px solid gold;
 }
 
 .search-container input {
-    width: 70%;
+    flex: 1;
     padding: 15px;
     font-size: 1em;
     border: 2px solid gold;
@@ -76,10 +77,10 @@ body {
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    margin: 40px auto 20px; /* Margin to separate from the search bar */
-    width: 90%;
+    gap: 20px; /* Adds spacing between images */
+    padding: 30px 20px; /* Adds spacing above the first image */
+    margin: 0 auto;
+    max-width: 90%;
 }
 
 .gallery a {

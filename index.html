@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeliPlan Yopal</title>
+    <title>DeliPlan Search</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>BUSCAR EN DELIPLAN YOPAL</h1>
-        <p>Busca escribiendo el establecimiento o producto/servicio que necesitas:</p>
+        <h1>Buscar en DeliPlan Yopal</h1>
     </header>
-
-    <section id="searchBar">
-        <input id="searchInput" type="text" placeholder="Escribe aquí...">
-        <button id="searchButton">Buscar</button>
-        <button id="resetButton">Restaurar</button>
+    <section class="search-container">
+        <input type="text" id="searchInput" placeholder="Escribe el establecimiento o producto que necesitas">
+        <button onclick="searchImages()">Buscar</button>
+        <button onclick="resetGallery()">Restaurar</button>
     </section>
-
-    <section id="gallery"></section>
-
+    <div id="gallery"></div>
     <footer>
-        <p>DeliPlan Yopal</p>
+        DeliPlan Yopal
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>

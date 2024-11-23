@@ -1,70 +1,44 @@
+// Initialize image data
 const images = [
     {
-        id: 1,
-        url: "https://static.wixstatic.com/media/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png/v1/fill/w_600,h_495,al_c,q_85,enc_auto/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png", // Nuevo enlace de imagen
-        keywords: ["restaurante", "comida", "agua"],
-        link: "https://eatcomercial01.wixsite.com/website-1/informaci%C3%B3n-deliplan-2024" // Enlace al sitio web principal
+        src: "https://static.wixstatic.com/media/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png/v1/fill/w_600,h_495,al_c,q_85,enc_auto/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png",
+        alt: "Celebration",
+        link: "https://eatcomercial01.wixsite.com/website-1/informaci%C3%B3n-deliplan-2024"
     },
     {
-        id: 2,
-        url: "https://images.unsplash.com/photo-1557682263-7056e2d2235d",
-        keywords: ["hotel", "naturaleza", "bosque"],
-        link: "https://unsplash.com/"
-    },
-    {
-        id: 3,
-        url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-        keywords: ["playa", "mar", "vacaciones"],
-        link: "https://unsplash.com/"
-    },
-    {
-        id: 4,
-        url: "https://images.unsplash.com/photo-1545286987-4a3bfb09dfc2",
-        keywords: ["peluquería", "ciudad", "urbano"],
-        link: "https://unsplash.com/"
+        src: "https://cdn.pixabay.com/photo/2024/08/31/18/47/deliplan-9012182__340.png",
+        alt: "DeliPlan Logo",
+        link: "https://pixabay.com/"
     }
 ];
 
-function displayImages(imageList) {
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = "";
-
-    if (imageList.length === 0) {
-        gallery.innerHTML = "<p>No se encontraron imágenes relacionadas.</p>";
-        return;
-    }
-
-    imageList.forEach(image => {
-        const anchor = document.createElement("a");
-        anchor.href = image.link; // Apunta al sitio web principal
-        anchor.target = "_blank";
-
+// Populate the gallery with all images initially
+const gallery = document.getElementById("gallery");
+function populateGallery(imagesToShow) {
+    gallery.innerHTML = ""; // Clear current gallery content
+    imagesToShow.forEach((image) => {
         const img = document.createElement("img");
-        img.src = `${image.url}?w=300&h=200&fit=crop&timestamp=${new Date().getTime()}`; // Añadimos timestamp para evitar caché
-        img.alt = image.keywords.join(", ");
-
-        anchor.appendChild(img);
-        gallery.appendChild(anchor);
+        img.src = image.src;
+        img.alt = image.alt;
+        img.onclick = () => window.open(image.link, "_blank");
+        gallery.appendChild(img);
     });
 }
 
-function searchImages() {
-    const query = document.getElementById("searchInput").value.toLowerCase().trim();
-    if (!query) {
-        alert("Por favor, introduce una palabra clave.");
-        return;
-    }
-
-    const filteredImages = images.filter(image =>
-        image.keywords.some(keyword => keyword.includes(query))
+// Search function
+document.getElementById("searchButton").addEventListener("click", () => {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const filteredImages = images.filter((img) =>
+        img.alt.toLowerCase().includes(query)
     );
+    populateGallery(filteredImages);
+});
 
-    displayImages(filteredImages);
-}
-
-function resetGallery() {
+// Reset gallery to show all images
+document.getElementById("resetButton").addEventListener("click", () => {
     document.getElementById("searchInput").value = "";
-    displayImages(images);
-}
+    populateGallery(images);
+});
 
-window.onload = () => displayImages(images);
+// Initialize the page
+populateGallery(images);

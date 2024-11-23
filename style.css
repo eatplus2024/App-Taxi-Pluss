@@ -8,37 +8,36 @@ body {
 }
 
 h1 {
-    font-size: 2rem; /* Tamaño ajustado para móviles */
+    font-size: 2rem;
     color: #333;
     margin-top: 20px;
-    padding: 0 10px;
 }
 
 p {
     font-size: 1rem;
     color: #666;
     margin-bottom: 20px;
-    padding: 0 10px;
 }
 
 #searchBar {
     margin: 20px auto;
-    max-width: 90%; /* Aseguramos que no exceda el ancho de la pantalla */
+    max-width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    flex-wrap: wrap; /* Permite que los elementos se reorganicen en línea */
+    flex-wrap: wrap;
 }
 
 #searchInput {
     flex: 1;
     padding: 10px;
     font-size: 1rem;
-    border: 2px solid gold;
+    border: 3px solid gold;
     border-radius: 5px;
     outline: none;
     background-color: #fff;
+    margin-right: 10px;
 }
 
 button {
@@ -57,27 +56,25 @@ button:hover {
 }
 
 #gallery {
-    margin: 20px auto;
-    max-width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ajuste dinámico */
-    gap: 10px; /* Separación entre imágenes */
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
+    margin: 30px auto;
+    max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
 #gallery img {
-    max-width: 100%;
-    width: 100%; /* Se asegura de ocupar el espacio disponible */
-    height: auto; /* Mantiene la proporción */
-    border-radius: 8px; /* Bordes suaves */
+    width: 60%; /* Miniature size, 60% of the screen width */
+    max-width: 300px; /* Maximum size for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
 
 #gallery img:hover {
-    transform: scale(1.05); /* Efecto visual */
+    transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -86,37 +83,24 @@ footer {
     padding: 10px 0;
     background-color: #333;
     color: #fff;
-    font-size: 0.9rem; /* Ajuste de tamaño */
+    font-size: 0.9rem;
 }
 
 @media screen and (max-width: 600px) {
     h1 {
-        font-size: 1.5rem; /* Más pequeño en celulares */
+        font-size: 1.5rem;
     }
 
     p {
-        font-size: 0.9rem; /* Texto más pequeño */
-    }
-
-    #searchBar {
-        flex-direction: column; /* Elementos en columna */
-        gap: 15px;
-    }
-
-    button {
-        width: 100%; /* Botones ocupan todo el ancho */
-    }
-
-    #gallery {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Imágenes más pequeñas */
-        gap: 8px; /* Separación reducida */
+        font-size: 0.9rem;
     }
 
     #gallery img {
-        border-radius: 5px; /* Bordes ajustados */
+        width: 60%; /* Ensure miniature size for smaller screens */
+        max-width: 200px;
     }
 
     footer {
-        font-size: 0.8rem; /* Texto más compacto */
+        font-size: 0.8rem;
     }
 }

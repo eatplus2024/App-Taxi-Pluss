@@ -1,9 +1,9 @@
 const images = [
-    { id: 1, url: "https://via.placeholder.com/300?text=Naturaleza", keywords: ["naturaleza", "verde", "árboles"] },
-    { id: 2, url: "https://via.placeholder.com/300?text=Agua", keywords: ["agua", "río", "mar"] },
-    { id: 3, url: "https://via.placeholder.com/300?text=Playa", keywords: ["playa", "vacaciones", "arena"] },
-    { id: 4, url: "https://via.placeholder.com/300?text=Ciudad", keywords: ["ciudad", "urbano", "edificios"] },
-    { id: 5, url: "https://via.placeholder.com/300?text=Montaña", keywords: ["montaña", "nieve", "paisaje"] }
+    { id: 1, url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0", keywords: ["agua", "río", "mar"] },
+    { id: 2, url: "https://images.unsplash.com/photo-1557682263-7056e2d2235d", keywords: ["naturaleza", "bosque", "verde"] },
+    { id: 3, url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", keywords: ["playa", "mar", "vacaciones"] },
+    { id: 4, url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0", keywords: ["montaña", "paisaje", "nieve"] },
+    { id: 5, url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0", keywords: ["ciudad", "urbano", "edificios"] }
 ];
 
 // Function to display all images
@@ -18,7 +18,7 @@ function displayImages(imageList) {
 
     imageList.forEach(image => {
         const imgElement = document.createElement("img");
-        imgElement.src = image.url;
+        imgElement.src = `${image.url}?w=300&h=200&fit=crop`;
         imgElement.alt = image.keywords.join(", ");
         gallery.appendChild(imgElement);
     });

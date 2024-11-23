@@ -1,27 +1,27 @@
 const images = [
     {
         id: 1,
-        url: "https://static.wixstatic.com/media/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png/v1/fill/w_600,h_495,al_c,q_85,enc_auto/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png",
+        url: "https://static.wixstatic.com/media/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png/v1/fill/w_600,h_495,al_c,q_85,enc_auto/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png", // Nuevo enlace de imagen
         keywords: ["restaurante", "comida", "agua"],
-        link: "https://eatcomercial01.wixsite.com/website-1/informaci%C3%B3n-deliplan-2024"
+        link: "https://eatcomercial01.wixsite.com/website-1/informaci%C3%B3n-deliplan-2024" // Enlace al sitio web principal
     },
     {
         id: 2,
         url: "https://images.unsplash.com/photo-1557682263-7056e2d2235d",
         keywords: ["hotel", "naturaleza", "bosque"],
-        link: "https://unsplash.com/photos/7056e2d2235d"
+        link: "https://unsplash.com/"
     },
     {
         id: 3,
         url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
         keywords: ["playa", "mar", "vacaciones"],
-        link: "https://unsplash.com/photos/b723cf961d3e"
+        link: "https://unsplash.com/"
     },
     {
         id: 4,
         url: "https://images.unsplash.com/photo-1545286987-4a3bfb09dfc2",
         keywords: ["peluquería", "ciudad", "urbano"],
-        link: "https://unsplash.com/photos/4a3bfb09dfc2"
+        link: "https://unsplash.com/"
     }
 ];
 
@@ -36,11 +36,11 @@ function displayImages(imageList) {
 
     imageList.forEach(image => {
         const anchor = document.createElement("a");
-        anchor.href = image.link;
+        anchor.href = image.link; // Apunta al sitio web principal
         anchor.target = "_blank";
 
         const img = document.createElement("img");
-        img.src = `${image.url}?w=300&h=200&fit=crop`;
+        img.src = `${image.url}?w=300&h=200&fit=crop&timestamp=${new Date().getTime()}`; // Añadimos timestamp para evitar caché
         img.alt = image.keywords.join(", ");
 
         anchor.appendChild(img);

@@ -25,22 +25,21 @@ const images = [
     }
 ];
 
-// Generar estilos dinámicos
+// Aplicar estilos dinámicos
 function applyDynamicStyles() {
     const styleElement = document.getElementById("dynamic-style");
     styleElement.textContent = `
         body {
             font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #fff;
+            background-color: #f4f4f9;
+            color: #333;
             text-align: center;
             margin: 0;
             padding: 0;
         }
 
         #main-title {
-            color: #00ffcc;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            color: #444;
             font-size: 28px;
             margin: 20px 0;
         }
@@ -94,7 +93,7 @@ function applyDynamicStyles() {
             border: none;
             border-radius: 25px;
             padding: 12px 20px;
-            color: #1a1a1a;
+            color: #fff;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -136,7 +135,7 @@ function applyDynamicStyles() {
     `;
 }
 
-// Mostrar imágenes en la galería
+// Mostrar imágenes
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";

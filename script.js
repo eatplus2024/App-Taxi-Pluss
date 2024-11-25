@@ -1,3 +1,13 @@
+// Detectar dispositivo móvil y enfocar automáticamente el campo de búsqueda
+function autoFocusSearchInput() {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Detectar si es un dispositivo móvil
+    const searchInput = document.getElementById("searchInput");
+
+    if (isMobile && searchInput) {
+        searchInput.focus();
+    }
+}
+
 const images = [
     {
         id: 1,
@@ -185,4 +195,5 @@ function resetGallery() {
 window.onload = () => {
     applyDynamicStyles();
     displayImages(images);
+    autoFocusSearchInput(); // Llamar a la función de autoenfoque
 };

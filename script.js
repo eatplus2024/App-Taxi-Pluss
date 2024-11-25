@@ -25,7 +25,6 @@ const images = [
     }
 ];
 
-// Aplicar estilos dinámicos
 function applyDynamicStyles() {
     const styleElement = document.getElementById("dynamic-style");
     styleElement.textContent = `
@@ -33,15 +32,14 @@ function applyDynamicStyles() {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             color: #333;
-            text-align: center;
             margin: 0;
-            padding: 0;
+            text-align: center;
         }
 
         #main-title {
-            color: #444;
-            font-size: 28px;
+            font-size: 24px;
             margin: 20px 0;
+            color: #333;
         }
 
         .search-container {
@@ -59,49 +57,41 @@ function applyDynamicStyles() {
 
         #searchInput {
             flex: 1;
-            padding: 15px 20px;
+            padding: 10px 15px;
             font-size: 18px;
-            border: 2px solid #00ffcc;
-            border-radius: 25px;
+            border: 3px solid #00ffcc;
+            border-radius: 30px;
             outline: none;
-            background: #fff;
-            color: #333;
-            transition: box-shadow 0.3s ease;
+            transition: 0.3s ease;
         }
 
         #searchInput:focus {
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            box-shadow: 0 0 15px #00ffcc;
         }
 
         #resetBtn {
             position: absolute;
             right: 10px;
-            background: none;
             border: none;
-            color: #00ffcc;
+            background: transparent;
             font-size: 18px;
+            color: #00ffcc;
             cursor: pointer;
-            outline: none;
         }
 
-        #resetBtn:hover {
-            color: #007f66;
-        }
-
-        .search-container button {
+        button {
+            margin: 10px 0;
+            padding: 10px 20px;
             background-color: #00ffcc;
             border: none;
-            border-radius: 25px;
-            padding: 12px 20px;
-            color: #fff;
+            border-radius: 20px;
             font-size: 16px;
-            font-weight: bold;
+            color: #fff;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
-        .search-container button:hover {
-            background-color: #007f66;
+        button:hover {
             transform: scale(1.05);
         }
 
@@ -110,32 +100,29 @@ function applyDynamicStyles() {
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin: 30px auto;
-            width: 90%;
+            margin-top: 20px;
         }
 
         #gallery img {
-            max-width: 90px; /* Tamaño miniatura */
+            width: 100px;
+            height: auto;
             border-radius: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         #gallery img:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            box-shadow: 0 0 15px #00ffcc;
         }
 
         footer {
-            background-color: #111;
-            color: #00ffcc;
-            padding: 10px;
+            margin-top: 20px;
             font-size: 14px;
-            text-align: center;
+            color: #666;
         }
     `;
 }
 
-// Mostrar imágenes
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
@@ -159,7 +146,6 @@ function displayImages(imageList) {
     });
 }
 
-// Función para buscar imágenes
 function searchImages() {
     const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
@@ -174,13 +160,11 @@ function searchImages() {
     displayImages(filteredImages);
 }
 
-// Restaurar galería
 function resetGallery() {
     document.getElementById("searchInput").value = "";
     displayImages(images);
 }
 
-// Iniciar aplicación
 window.onload = () => {
     applyDynamicStyles();
     displayImages(images);

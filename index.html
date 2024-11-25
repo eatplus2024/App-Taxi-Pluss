@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeliPlan Search</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Buscar en DeliPlan</title>
+    <style id="dynamic-style"></style> <!-- Estilo generado desde el script -->
 </head>
 <body>
     <header>
-        <h1>Encuentra lo que necesitas</h1>
+        <h1 id="main-title">Buscar en DeliPlan</h1>
     </header>
     <section class="search-container">
-        <input type="text" id="searchInput" placeholder="Escribe el establecimiento o producto que necesitas">
+        <div id="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Escribe el establecimiento o producto que necesitas">
+            <button id="resetBtn" onclick="resetGallery()">X</button>
+        </div>
         <button onclick="searchImages()">Buscar</button>
-        <button onclick="resetGallery()">Restaurar</button>
     </section>
     <div id="gallery"></div>
     <footer>

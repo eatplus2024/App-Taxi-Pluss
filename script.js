@@ -1,9 +1,9 @@
 const images = [
     {
         id: 1,
-        url: "https://static.wixstatic.com/media/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png/v1/fill/w_600,h_495,al_c,q_85,enc_auto/a4f6c8_7103def731ef4200a908196b2caa19fc~mv2.png", // Nuevo enlace de imagen
+        url: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
         keywords: ["restaurante", "comida", "agua"],
-        link: "https://eatcomercial01.wixsite.com/website-1/informaci%C3%B3n-deliplan-2024" // Enlace al sitio web principal
+        link: "https://unsplash.com/"
     },
     {
         id: 2,
@@ -25,6 +25,118 @@ const images = [
     }
 ];
 
+// Generar estilos dinámicos
+function applyDynamicStyles() {
+    const styleElement = document.getElementById("dynamic-style");
+    styleElement.textContent = `
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #main-title {
+            color: #00ffcc;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            font-size: 28px;
+            margin: 20px 0;
+        }
+
+        .search-container {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        #search-wrapper {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: 2px solid #00ffcc;
+            border-radius: 25px;
+            outline: none;
+            background: #fff;
+            color: #333;
+            transition: box-shadow 0.3s ease;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+        }
+
+        #resetBtn {
+            position: absolute;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #00ffcc;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #resetBtn:hover {
+            color: #007f66;
+        }
+
+        .search-container button {
+            background-color: #00ffcc;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #007f66;
+            transform: scale(1.05);
+        }
+
+        #gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            width: 90%;
+        }
+
+        #gallery img {
+            max-width: 90px; /* Tamaño miniatura */
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+        }
+
+        footer {
+            background-color: #111;
+            color: #00ffcc;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+    `;
+}
+
+// Mostrar imágenes en la galería
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
@@ -36,22 +148,19 @@ function displayImages(imageList) {
 
     imageList.forEach(image => {
         const anchor = document.createElement("a");
-        anchor.href = image.link; // Apunta al sitio web principal
+        anchor.href = image.link;
         anchor.target = "_blank";
 
         const img = document.createElement("img");
-        img.src = `${image.url}?w=300&h=200&fit=crop&timestamp=${new Date().getTime()}`; // Añadimos timestamp para evitar caché
+        img.src = image.url;
         img.alt = image.keywords.join(", ");
-        img.style.width = "100%"; // Ancho de miniatura
-        img.style.maxWidth = "300px"; // Tamaño máximo para pantallas grandes
-        img.style.height = "auto"; // Mantiene proporciones
-        img.style.margin = "10px auto"; // Añade espacio entre imágenes
 
         anchor.appendChild(img);
         gallery.appendChild(anchor);
     });
 }
 
+// Función para buscar imágenes
 function searchImages() {
     const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
@@ -66,9 +175,14 @@ function searchImages() {
     displayImages(filteredImages);
 }
 
+// Restaurar galería
 function resetGallery() {
     document.getElementById("searchInput").value = "";
     displayImages(images);
 }
 
-window.onload = () => displayImages(images);
+// Iniciar aplicación
+window.onload = () => {
+    applyDynamicStyles();
+    displayImages(images);
+};

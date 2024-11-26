@@ -35,21 +35,119 @@ const images = [
     },
 ];
 
-// Mostrar el indicador de carga
-function showLoadingIndicator() {
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = `
-        <div id="loading-indicator" style="text-align: center; margin-top: 50px;">
-            <div style="width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid #00ffcc; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
-            <p style="color: #333; font-size: 16px;">Buscando...</p>
-        </div>
-    `;
+// Normalizar cadenas para ignorar mayúsculas, tildes y diacríticos
+function normalizeString(str) {
+    return str
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 }
 
-// Ocultar el indicador de carga
-function hideLoadingIndicator() {
+// Mostrar u ocultar el indicador de carga
+function toggleLoadingIndicator(show) {
+    const loadingOverlay = document.getElementById("loading-overlay");
+    loadingOverlay.style.display = show ? "flex" : "none";
+}
+
+// Mostrar imágenes en la galería (coincidencias exactas y parciales)
+function displayImages(filteredImages, partialMatches = []) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
+
+    if (filteredImages.length === 0 && partialMatches.length === 0) {
+        gallery.innerHTML = "<p>No hay resultados relacionados.</p>";
+        return;
+    }
+
+    if (filteredImages.length > 0) {
+        const exactTitle = document.createElement("h3");
+        exactTitle.textContent = "Resultados principales:";
+        gallery.appendChild(exactTitle);
+
+        filteredImages.forEach((image) => {
+            const anchor = document.createElement("a");
+            anchor.href = image.link;
+            anchor.target = "_blank";
+
+            const img = document.createElement("img");
+            img.src = image.url;
+            img.alt = image.keywords.join(", ");
+
+            anchor.appendChild(img);
+            gallery.appendChild(anchor);
+        });
+    }
+
+    if (partialMatches.length > 0) {
+        const separator = document.createElement("hr");
+        gallery.appendChild(separator);
+
+        const partialTitle = document.createElement("h3");
+        partialTitle.textContent = "Coincidencias relacionadas:";
+        gallery.appendChild(partialTitle);
+
+        partialMatches.forEach(({ image, matches }) => {
+            const anchor = document.createElement("a");
+            anchor.href = image.link;
+            anchor.target = "_blank";
+
+            const img = document.createElement("img");
+            img.src = image.url;
+            img.alt = image.keywords.join(", ");
+
+            anchor.appendChild(img);
+            gallery.appendChild(anchor);
+
+            const matchesText = document.createElement("p");
+            matchesText.textContent = `Palabras relacionadas: ${matches.join(", ")}`;
+            matchesText.style.fontSize = "12px";
+            matchesText.style.color = "#555";
+            gallery.appendChild(matchesText);
+        });
+    }
+}
+
+// Buscar imágenes con coincidencias avanzadas
+function searchImages() {
+    const query = normalizeString(document.getElementById("searchInput").value.trim());
+    if (!query) {
+        alert("Escribe aquí lo que buscas.");
+        return;
+    }
+
+    toggleLoadingIndicator(true); // Mostrar indicador de carga
+
+    setTimeout(() => {
+        const filteredImages = [];
+        const partialMatches = [];
+
+        images.forEach((image) => {
+            const normalizedKeywords = image.keywords.map(normalizeString);
+
+            if (normalizedKeywords.some((keyword) => keyword.includes(query))) {
+                filteredImages.push(image);
+            } else {
+                const words = query.split(" ");
+                const matches = words.filter((word) =>
+                    normalizedKeywords.some((keyword) => keyword.includes(word))
+                );
+
+                if (matches.length > 0) {
+                    partialMatches.push({ image, matches });
+                }
+            }
+        });
+
+        displayImages(filteredImages, partialMatches);
+        toggleLoadingIndicator(false); // Ocultar indicador de carga
+    }, 1000); // Simular retraso de búsqueda
+}
+
+// Restaurar la galería a su estado inicial (sin imágenes)
+function resetGallery() {
+    document.getElementById("searchInput").value = "";
+    document.getElementById("gallery").innerHTML =
+        "<p>Usa la barra de búsqueda para ver imágenes.</p>";
 }
 
 // Aplicar estilos dinámicos
@@ -63,11 +161,6 @@ function applyDynamicStyles() {
             text-align: center;
             margin: 0;
             padding: 0;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         #main-title {
@@ -165,57 +258,41 @@ function applyDynamicStyles() {
             font-size: 14px;
             text-align: center;
         }
+
+        #loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ffcc;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+
+        .spinner {
+            border: 8px solid rgba(0, 255, 204, 0.3);
+            border-top: 8px solid #00ffcc;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 15px;
+            font-size: 18px;
+        }
     `;
-}
-
-// Mostrar imágenes en la galería
-function displayImages(imageList) {
-    hideLoadingIndicator();
-    const gallery = document.getElementById("gallery");
-
-    if (imageList.length === 0) {
-        gallery.innerHTML = "<p>No hay resultados relacionados.</p>";
-        return;
-    }
-
-    imageList.forEach((image) => {
-        const anchor = document.createElement("a");
-        anchor.href = image.link;
-        anchor.target = "_blank";
-
-        const img = document.createElement("img");
-        img.src = image.url;
-        img.alt = image.keywords.join(", ");
-
-        anchor.appendChild(img);
-        gallery.appendChild(anchor);
-    });
-}
-
-// Buscar imágenes
-function searchImages() {
-    const query = document.getElementById("searchInput").value.toLowerCase().trim();
-    if (!query) {
-        alert("Escribe aquí lo que buscas.");
-        return;
-    }
-
-    showLoadingIndicator(); // Mostrar cargando
-
-    setTimeout(() => {
-        // Simulación de búsqueda con un pequeño retraso
-        const filteredImages = images.filter((image) =>
-            image.keywords.some((keyword) => keyword.toLowerCase() === query)
-        );
-
-        displayImages(filteredImages); // Mostrar resultados
-    }, 1000); // Simula un retraso de 1 segundo
-}
-
-// Restaurar la galería a su estado inicial
-function resetGallery() {
-    document.getElementById("searchInput").value = "";
-    document.getElementById("gallery").innerHTML = "<p>Usa la barra de búsqueda para ver imágenes.</p>";
 }
 
 // Inicializar la aplicación

@@ -35,6 +35,23 @@ const images = [
     },
 ];
 
+// Mostrar el indicador de carga
+function showLoadingIndicator() {
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = `
+        <div id="loading-indicator" style="text-align: center; margin-top: 50px;">
+            <div style="width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid #00ffcc; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            <p style="color: #333; font-size: 16px;">Buscando...</p>
+        </div>
+    `;
+}
+
+// Ocultar el indicador de carga
+function hideLoadingIndicator() {
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+}
+
 // Aplicar estilos dinámicos
 function applyDynamicStyles() {
     const styleElement = document.getElementById("dynamic-style");
@@ -46,6 +63,11 @@ function applyDynamicStyles() {
             text-align: center;
             margin: 0;
             padding: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         #main-title {
@@ -146,107 +168,51 @@ function applyDynamicStyles() {
     `;
 }
 
-// Mostrar imágenes en la galería (actualizado para incluir eventos de enlace)
-function displayImages(filteredImages, partialMatches = []) {
+// Mostrar imágenes en la galería
+function displayImages(imageList) {
+    hideLoadingIndicator();
     const gallery = document.getElementById("gallery");
-    gallery.innerHTML = "";
 
-    if (filteredImages.length === 0 && partialMatches.length === 0) {
+    if (imageList.length === 0) {
         gallery.innerHTML = "<p>No hay resultados relacionados.</p>";
         return;
     }
 
-    if (filteredImages.length > 0) {
-        const exactTitle = document.createElement("h3");
-        exactTitle.textContent = "Resultados principales:";
-        gallery.appendChild(exactTitle);
+    imageList.forEach((image) => {
+        const anchor = document.createElement("a");
+        anchor.href = image.link;
+        anchor.target = "_blank";
 
-        filteredImages.forEach((image) => {
-            const anchor = document.createElement("a");
-            anchor.href = image.link;
-            anchor.target = "_blank";
+        const img = document.createElement("img");
+        img.src = image.url;
+        img.alt = image.keywords.join(", ");
 
-            const img = document.createElement("img");
-            img.src = image.url;
-            img.alt = image.keywords.join(", ");
-
-            anchor.appendChild(img);
-            gallery.appendChild(anchor);
-        });
-    }
-
-    if (partialMatches.length > 0) {
-        const separator = document.createElement("hr");
-        gallery.appendChild(separator);
-
-        const partialTitle = document.createElement("h3");
-        partialTitle.textContent = "Coincidencias relacionadas:";
-        gallery.appendChild(partialTitle);
-
-        partialMatches.forEach(({ image, matches }) => {
-            const anchor = document.createElement("a");
-            anchor.href = image.link;
-            anchor.target = "_blank";
-
-            const img = document.createElement("img");
-            img.src = image.url;
-            img.alt = image.keywords.join(", ");
-
-            anchor.appendChild(img);
-            gallery.appendChild(anchor);
-
-            const matchesText = document.createElement("p");
-            matchesText.textContent = `Palabras relacionadas: ${matches.join(", ")}`;
-            matchesText.style.fontSize = "12px";
-            matchesText.style.color = "#555";
-            gallery.appendChild(matchesText);
-        });
-    }
-
-    // Agregar eventos a los enlaces
-    addLinkEventListeners();
-}
-
-// Detectar si hay conexión a Internet
-function checkInternetConnection() {
-    if (!navigator.onLine) {
-        alert("Parece que no tienes conexión a Internet. Por favor, verifica tu conexión.");
-        return false;
-    }
-    return true;
-}
-
-// Comprobar si un enlace es accesible antes de abrirlo
-function verifyLinkAccessibility(link) {
-    fetch(link, { method: "HEAD" })
-        .then((response) => {
-            if (response.ok) {
-                window.open(link, "_blank"); // Abrir el enlace si es accesible
-            } else {
-                alert("El sitio no está disponible actualmente. Intenta más tarde.");
-            }
-        })
-        .catch(() => {
-            alert("No se pudo conectar al sitio. Por favor, verifica tu conexión.");
-        });
-}
-
-// Modificar el comportamiento de los enlaces en la galería
-function addLinkEventListeners() {
-    const gallery = document.getElementById("gallery");
-    const links = gallery.querySelectorAll("a");
-
-    links.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir el comportamiento predeterminado
-            if (checkInternetConnection()) {
-                verifyLinkAccessibility(link.href); // Verificar el enlace
-            }
-        });
+        anchor.appendChild(img);
+        gallery.appendChild(anchor);
     });
 }
 
-// Restaurar la galería a su estado inicial (sin imágenes)
+// Buscar imágenes
+function searchImages() {
+    const query = document.getElementById("searchInput").value.toLowerCase().trim();
+    if (!query) {
+        alert("Escribe aquí lo que buscas.");
+        return;
+    }
+
+    showLoadingIndicator(); // Mostrar cargando
+
+    setTimeout(() => {
+        // Simulación de búsqueda con un pequeño retraso
+        const filteredImages = images.filter((image) =>
+            image.keywords.some((keyword) => keyword.toLowerCase() === query)
+        );
+
+        displayImages(filteredImages); // Mostrar resultados
+    }, 1000); // Simula un retraso de 1 segundo
+}
+
+// Restaurar la galería a su estado inicial
 function resetGallery() {
     document.getElementById("searchInput").value = "";
     document.getElementById("gallery").innerHTML = "<p>Usa la barra de búsqueda para ver imágenes.</p>";

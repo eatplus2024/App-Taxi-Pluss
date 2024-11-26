@@ -1,6 +1,6 @@
 // Detectar dispositivo móvil y enfocar automáticamente el campo de búsqueda
 function autoFocusSearchInput() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Detectar si es un dispositivo móvil
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const searchInput = document.getElementById("searchInput");
 
     if (isMobile && searchInput) {
@@ -11,28 +11,28 @@ function autoFocusSearchInput() {
 const images = [
     {
         id: 1,
-        url: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
-        keywords: ["restaurante", "comida", "agua"],
-        link: "https://unsplash.com/"
+        url: "https://static.wixstatic.com/media/a4f6c8_f9c96ee36ee747a2a8e8da2d1ec9b0a1~mv2.png",
+        keywords: ["taxi", "Taxis", "taxis"],
+        link: "https://eatcomercial01.wixsite.com/website-1/turitaxis",
     },
     {
         id: 2,
-        url: "https://images.unsplash.com/photo-1557682263-7056e2d2235d",
-        keywords: ["hotel", "naturaleza", "bosque"],
-        link: "https://unsplash.com/"
+        url: "https://static.wixstatic.com/media/a4f6c8_04ad6e3130d04f4dada287584d18cf01~mv2.png",
+        keywords: ["muebles", "cama", "colchon"],
+        link: "https://unsplash.com/",
     },
     {
         id: 3,
-        url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-        keywords: ["playa", "mar", "vacaciones"],
-        link: "https://unsplash.com/"
+        url: "https://static.wixstatic.com/media/a4f6c8_012863f5fa3b4634b17feaae5e57a545~mv2.png",
+        keywords: ["domiciliario", "domicilio", "comida"],
+        link: "https://unsplash.com/",
     },
     {
         id: 4,
-        url: "https://images.unsplash.com/photo-1545286987-4a3bfb09dfc2",
-        keywords: ["peluquería", "ciudad", "urbano"],
-        link: "https://unsplash.com/"
-    }
+        url: "https://static.wixstatic.com/media/a4f6c8_8c699bccce5f4ae28c6bee5e6edcb441~mv2.png",
+        keywords: ["turisticos", "cafe", "restaurante"],
+        link: "https://unsplash.com/",
+    },
 ];
 
 // Aplicar estilos dinámicos
@@ -125,8 +125,8 @@ function applyDynamicStyles() {
         }
 
         #gallery img {
-            max-width: 150px; /* Tamaño ajustado */
-            height: auto; /* Mantener proporción */
+            max-width: 150px;
+            height: auto;
             border-radius: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -146,17 +146,21 @@ function applyDynamicStyles() {
     `;
 }
 
-// Mostrar imágenes
+// Mostrar imágenes en la galería
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
 
     if (imageList.length === 0) {
-        gallery.innerHTML = "<p>No se encontraron imágenes relacionadas.</p>";
+        gallery.innerHTML = "<p>No hay resultados relacionados.</p>";
         return;
     }
 
-    imageList.forEach(image => {
+    // Evitar duplicados
+    const uniqueImages = Array.from(new Set(imageList.map((img) => img.url)))
+        .map((url) => imageList.find((img) => img.url === url));
+
+    uniqueImages.forEach((image) => {
         const anchor = document.createElement("a");
         anchor.href = image.link;
         anchor.target = "_blank";
@@ -170,30 +174,31 @@ function displayImages(imageList) {
     });
 }
 
-// Función para buscar imágenes
+// Filtrar imágenes según las palabras clave
 function searchImages() {
     const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
-        alert("Por favor, introduce una palabra clave.");
+        alert("Escribe aquí lo que buscas.");
         return;
     }
 
-    const filteredImages = images.filter(image =>
-        image.keywords.some(keyword => keyword.includes(query))
+    // Filtrar imágenes por coincidencia estricta en palabras clave
+    const filteredImages = images.filter((image) =>
+        image.keywords.some((keyword) => keyword.toLowerCase() === query)
     );
 
     displayImages(filteredImages);
 }
 
-// Restaurar galería
+// Restaurar la galería a su estado inicial
 function resetGallery() {
     document.getElementById("searchInput").value = "";
     displayImages(images);
 }
 
-// Iniciar aplicación
+// Inicializar la aplicación
 window.onload = () => {
     applyDynamicStyles();
     displayImages(images);
-    autoFocusSearchInput(); // Llamar a la función de autoenfoque
+    autoFocusSearchInput();
 };

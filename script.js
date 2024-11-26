@@ -18,7 +18,7 @@ const images = [
     {
         id: 2,
         url: "https://static.wixstatic.com/media/a4f6c8_04ad6e3130d04f4dada287584d18cf01~mv2.png",
-        keywords: ["muebles", "cama", "colchon"],
+        keywords: ["muebles js", "cama", "colchon", "espaldar", "sabana", "tendido", "artesanias", "toldillo", "cuadro", "sofa", "peinador", "nochero", "semanario", "closet", "sala", "comedor"],
         link: "https://unsplash.com/",
     },
     {
@@ -235,12 +235,12 @@ function applyDynamicStyles() {
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin: 30px auto;
+            margin: 10px auto;
             width: 90%;
         }
 
         #gallery img {
-            max-width: 150px;
+            max-width: 200px;
             height: auto;
             border-radius: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;

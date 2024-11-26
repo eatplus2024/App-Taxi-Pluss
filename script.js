@@ -146,7 +146,7 @@ function applyDynamicStyles() {
     `;
 }
 
-// Mostrar imágenes en la galería
+// Mostrar imágenes en la galería (solo las que coincidan)
 function displayImages(imageList) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
@@ -156,17 +156,13 @@ function displayImages(imageList) {
         return;
     }
 
-    // Evitar duplicados
-    const uniqueImages = Array.from(new Set(imageList.map((img) => img.url)))
-        .map((url) => imageList.find((img) => img.url === url));
-
-    uniqueImages.forEach((image) => {
+    imageList.forEach((image) => {
         const anchor = document.createElement("a");
         anchor.href = image.link;
         anchor.target = "_blank";
 
         const img = document.createElement("img");
-        img.src = image.url;
+        img.src = image.url; // Solo cargar cuando se encuentra
         img.alt = image.keywords.join(", ");
 
         anchor.appendChild(img);
@@ -174,7 +170,7 @@ function displayImages(imageList) {
     });
 }
 
-// Filtrar imágenes según las palabras clave
+// Buscar imágenes solo cuando se haga una consulta
 function searchImages() {
     const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
@@ -190,15 +186,15 @@ function searchImages() {
     displayImages(filteredImages);
 }
 
-// Restaurar la galería a su estado inicial
+// Restaurar la galería a su estado inicial (sin imágenes)
 function resetGallery() {
     document.getElementById("searchInput").value = "";
-    displayImages(images);
+    document.getElementById("gallery").innerHTML = "<p>Usa la barra de búsqueda para ver imágenes.</p>";
 }
 
 // Inicializar la aplicación
 window.onload = () => {
     applyDynamicStyles();
-    displayImages(images);
+    resetGallery(); // No cargar imágenes al inicio
     autoFocusSearchInput();
 };

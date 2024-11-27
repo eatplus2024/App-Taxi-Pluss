@@ -648,7 +648,7 @@ function applyDynamicStyles() {
         }
 
         #gallery img {
-            max-width: 150px;
+            max-width: 180px;
             height: auto;
             border-radius: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;

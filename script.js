@@ -443,18 +443,25 @@ const images = [
     },
 ];
 
+// Lista de palabras comunes a ignorar
+const stopWords = [
+    "a", "de", "para", "el", "la", "los", "las", "y", "o", "en", "con", "un", "una", "del", "al", "por"
+];
+
 // Normalizar cadenas para ignorar mayúsculas, tildes y diacríticos
 function normalizeString(str) {
     return str
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
 }
 
-// Mostrar u ocultar el indicador de carga
-function toggleLoadingIndicator(show) {
-    const loadingOverlay = document.getElementById("loading-overlay");
-    loadingOverlay.style.display = show ? "flex" : "none";
+// Filtrar palabras importantes, excluyendo las "stop words"
+function filterImportantWords(query) {
+    return query
+        .split(" ")
+        .filter(word => word && !stopWords.includes(word.toLowerCase()));
 }
 
 // Mostrar imágenes en la galería (coincidencias exactas y parciales)
@@ -517,9 +524,15 @@ function displayImages(filteredImages, partialMatches = []) {
 
 // Buscar imágenes con coincidencias avanzadas
 function searchImages() {
-    const query = normalizeString(document.getElementById("searchInput").value.trim());
-    if (!query) {
+    const rawQuery = document.getElementById("searchInput").value.trim();
+    if (!rawQuery) {
         alert("Escribe aquí lo que buscas.");
+        return;
+    }
+
+    const queryWords = filterImportantWords(normalizeString(rawQuery));
+    if (queryWords.length === 0) {
+        alert("Por favor, usa palabras clave más específicas.");
         return;
     }
 
@@ -532,11 +545,10 @@ function searchImages() {
         images.forEach((image) => {
             const normalizedKeywords = image.keywords.map(normalizeString);
 
-            if (normalizedKeywords.some((keyword) => keyword.includes(query))) {
+            if (queryWords.some((word) => normalizedKeywords.includes(word))) {
                 filteredImages.push(image);
             } else {
-                const words = query.split(" ");
-                const matches = words.filter((word) =>
+                const matches = queryWords.filter((word) =>
                     normalizedKeywords.some((keyword) => keyword.includes(word))
                 );
 
@@ -551,6 +563,12 @@ function searchImages() {
     }, 1000); // Simular retraso de búsqueda
 }
 
+// Mostrar u ocultar el indicador de carga
+function toggleLoadingIndicator(show) {
+    const loadingOverlay = document.getElementById("loading-overlay");
+    loadingOverlay.style.display = show ? "flex" : "none";
+}
+
 // Restaurar la galería a su estado inicial (sin imágenes)
 function resetGallery() {
     document.getElementById("searchInput").value = "";
@@ -558,154 +576,8 @@ function resetGallery() {
         "<p>Usa la barra de búsqueda para ver imágenes.</p>";
 }
 
-// Aplicar estilos dinámicos
-function applyDynamicStyles() {
-    const styleElement = document.getElementById("dynamic-style");
-    styleElement.textContent = `
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        #main-title {
-            color: #444;
-            font-size: 28px;
-            margin: 20px 0;
-        }
-
-        .search-container {
-            margin: 20px auto;
-            width: 90%;
-            max-width: 600px;
-        }
-
-        #search-wrapper {
-            display: flex;
-            align-items: center;
-            position: relative;
-            margin-bottom: 10px;
-        }
-
-        #searchInput {
-            flex: 1;
-            padding: 15px 20px;
-            font-size: 18px;
-            border: 2px solid #00ffcc;
-            border-radius: 25px;
-            outline: none;
-            background: #fff;
-            color: #333;
-            transition: box-shadow 0.3s ease;
-        }
-
-        #searchInput:focus {
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        #resetBtn {
-            position: absolute;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #00ffcc;
-            font-size: 18px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        #resetBtn:hover {
-            color: #007f66;
-        }
-
-        .search-container button {
-            background-color: #00ffcc;
-            border: none;
-            border-radius: 25px;
-            padding: 12px 20px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .search-container button:hover {
-            background-color: #007f66;
-            transform: scale(1.05);
-        }
-
-        #gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px auto;
-            width: 90%;
-        }
-
-        #gallery img {
-            max-width: 190px;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        #gallery img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        footer {
-            background-color: #111;
-            color: #00ffcc;
-            padding: 10px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        #loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: #00ffcc;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
-        }
-
-        .spinner {
-            border: 8px solid rgba(0, 255, 204, 0.3);
-            border-top: 8px solid #00ffcc;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            animation: spin 1.2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            margin-top: 15px;
-            font-size: 18px;
-        }
-    `;
-}
-
 // Inicializar la aplicación
 window.onload = () => {
-    applyDynamicStyles();
     resetGallery();
     autoFocusSearchInput();
 };

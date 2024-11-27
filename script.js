@@ -454,7 +454,6 @@ function normalizeString(str) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-        .trim();
 }
 
 // Filtrar palabras importantes, excluyendo las "stop words"
